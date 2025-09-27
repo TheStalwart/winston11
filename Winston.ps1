@@ -8,7 +8,7 @@ function Install-EssentialDiagnosticApps {
     winget install --id REALiX.HWiNFO -e
     winget install --id CrystalDewWorld.CrystalDiskInfo -e
     winget install --id CrystalDewWorld.CrystalDiskMark -e
-    winget install --id Guru3D.RTSS -e
+    winget install --id Guru3D.RTSS -e # Standalone frame rate limiter
 }
 
 function Install-WinCaffeine {
