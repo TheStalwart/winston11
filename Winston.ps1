@@ -9,10 +9,39 @@ function Install-EssentialDiagnosticApps {
     winget install --id CrystalDewWorld.CrystalDiskInfo -e
     winget install --id CrystalDewWorld.CrystalDiskMark -e
 }
+
+<#
+.SYNOPSIS
+  Installs Steam if not already present.
+.DESCRIPTION
+  Installer package only bootstrapts the installation.
+  Steam client will download and install the rest when launched.
+#>
+function Install-Steam {
+    $steamPath = "C:\Program Files (x86)\Steam\steam.exe"
+    if (-not (Test-Path $steamPath)) {
+        winget install --id Valve.Steam -e
+    }
+}
+
+<#
+.SYNOPSIS
+  Installs Epic Games Launcher if not already present.
+.DESCRIPTION
+  Attempting to update an existing installation via winget results in an error,
+  and the launcher has its own update mechanism, so we only install if not present.
+#>
+function Install-EpicGamesLauncher {
+    $epicPath = "C:\Program Files (x86)\Epic Games\Launcher\Portal\Binaries\Win32\EpicGamesLauncher.exe"
+    if (-not (Test-Path $epicPath)) {
+        winget install --id EpicGames.EpicGamesLauncher -e
+    }
 }
 
 function Main {
     Install-EssentialDiagnosticApps
+    Install-Steam
+    Install-EpicGamesLauncher
 }
 
 Main
