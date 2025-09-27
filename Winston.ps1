@@ -16,10 +16,15 @@ function Install-WinCaffeine {
         New-Item -Path $appsDir -ItemType Directory | Out-Null
     }
 
-    $winCaffeinePath = "$appsDir\WinCaffeine-1.2.0.0.exe"
+    $winCaffeineFileName = "WinCaffeine-1.2.0.0"
+    $winCaffeinePath = "$appsDir\$winCaffeineFileName.exe"
     $winCaffeineDownloadURL = "https://wincaffeine.jonaskohl.de/download.php?version=latest"
     if (-not (Test-Path $winCaffeinePath)) {
         Invoke-WebRequest -Uri $winCaffeineDownloadURL -OutFile $winCaffeinePath
+    }
+
+    if (-not (Get-Process -Name "$winCaffeineFileName" -ErrorAction SilentlyContinue)) {
+        & $winCaffeinePath
     }
 }
 
