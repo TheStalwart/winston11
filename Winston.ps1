@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-  Installs essential diagnostic apps.
+  Installs or updates essential diagnostic apps.
 .DESCRIPTION
   If winget finds any packages out of date, it will update them.
 #>
