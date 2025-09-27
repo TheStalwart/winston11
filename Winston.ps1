@@ -26,6 +26,8 @@ function Install-WinCaffeine {
     if (-not (Get-Process -Name "$winCaffeineFileName" -ErrorAction SilentlyContinue)) {
         & $winCaffeinePath
     }
+
+    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" -Name "WinCaffeine" -Value "$winCaffeinePath"
 }
 
 <#
