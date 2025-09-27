@@ -10,6 +10,19 @@ function Install-EssentialDiagnosticApps {
     winget install --id CrystalDewWorld.CrystalDiskMark -e
 }
 
+function Install-WinCaffeine {
+    $appsDir = "$env:USERPROFILE\Apps"
+    if (-not (Test-Path $appsDir)) {
+        New-Item -Path $appsDir -ItemType Directory | Out-Null
+    }
+
+    $winCaffeinePath = "$appsDir\WinCaffeine-1.2.0.0.exe"
+    $winCaffeineDownloadURL = "https://wincaffeine.jonaskohl.de/download.php?version=latest"
+    if (-not (Test-Path $winCaffeinePath)) {
+        Invoke-WebRequest -Uri $winCaffeineDownloadURL -OutFile $winCaffeinePath
+    }
+}
+
 <#
 .SYNOPSIS
   Installs Steam if not already present.
@@ -40,6 +53,7 @@ function Install-EpicGamesLauncher {
 
 function Main {
     Install-EssentialDiagnosticApps
+    Install-WinCaffeine
     Install-Steam
     Install-EpicGamesLauncher
 }
