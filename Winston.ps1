@@ -1,10 +1,11 @@
 <#
 .SYNOPSIS
-  Installs or updates essential diagnostic apps.
+  Installs or updates essential utilities and diagnostic apps.
 .DESCRIPTION
   If winget finds any packages out of date, it will update them.
 #>
-function Install-EssentialDiagnosticApps {
+function Install-EssentialUtilities {
+    winget install --id 7zip.7zip -e
     winget install --id REALiX.HWiNFO -e
     winget install --id CrystalDewWorld.CrystalDiskInfo -e
     winget install --id CrystalDewWorld.CrystalDiskMark -e
@@ -60,7 +61,7 @@ function Install-EpicGamesLauncher {
 }
 
 function Main {
-    Install-EssentialDiagnosticApps
+    Install-EssentialUtilities
     Install-WinCaffeine
     Install-Steam
     Install-EpicGamesLauncher
