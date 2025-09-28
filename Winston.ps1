@@ -10,6 +10,8 @@ function Install-EssentialUtilities {
     winget install --id CrystalDewWorld.CrystalDiskInfo -e
     winget install --id CrystalDewWorld.CrystalDiskMark -e
     winget install --id Guru3D.RTSS -e # Standalone frame rate limiter
+    winget install --id PrimateLabs.Geekbench.6 -e # OpenCL and Vulkan benchmark
+    winget install --id Unigine.HeavenBenchmark -e # DirectX 9 and 11 benchmark
 }
 
 function Install-WinCaffeine {
