@@ -1,0 +1,22 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "PowerShell",
+            "request": "launch",
+            "name": "Debug Winston",
+            "script": "${workspaceFolder}/Winston.ps1",
+            "cwd": "${workspaceFolder}",
+            "args": [
+                "-SkipInstallSelf"
+            ]
+        },
+        {
+            "type": "PowerShell",
+            "request": "launch",
+            "name": "Debug Self-Install",
+            "script": "${workspaceFolder}/Winston.ps1",
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}

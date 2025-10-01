@@ -1,3 +1,16 @@
+param(
+    [switch]$SkipInstallSelf = $false
+)
+
+function Install-Self {
+    $selfDestinationPath = "$appsDir\Winston.ps1"
+
+    if (-not ($PSCommandPath -eq $selfDestinationPath)) {
+        $upstreamWinstonScriptURL = "https://raw.githubusercontent.com/TheStalwart/winston11/refs/heads/main/Winston.ps1"
+        Invoke-WebRequest -Uri $upstreamWinstonScriptURL -OutFile $selfDestinationPath
+    }
+}
+
 <#
 .SYNOPSIS
   Installs or updates essential utilities and diagnostic apps.
@@ -15,11 +28,6 @@ function Install-EssentialUtilities {
 }
 
 function Install-WinCaffeine {
-    $appsDir = "$env:USERPROFILE\Apps"
-    if (-not (Test-Path $appsDir)) {
-        New-Item -Path $appsDir -ItemType Directory | Out-Null
-    }
-
     $winCaffeineFileName = "WinCaffeine-1.2.0.0"
     $winCaffeinePath = "$appsDir\$winCaffeineFileName.exe"
     $winCaffeineDownloadURL = "https://wincaffeine.jonaskohl.de/download.php?version=latest"
@@ -82,6 +90,15 @@ function Install-EpicGamesLauncher {
 }
 
 function Main {
+    $appsDir = "$env:USERPROFILE\Apps"
+    if (-not (Test-Path $appsDir)) {
+        New-Item -Path $appsDir -ItemType Directory | Out-Null
+    }
+
+    if (-not $SkipInstallSelf) {
+        Install-Self
+    }
+
     Install-EssentialUtilities
     Install-WinCaffeine
     Install-Rainmeter
