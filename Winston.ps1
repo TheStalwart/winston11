@@ -3,12 +3,32 @@ param(
 )
 
 function Install-Self {
-    $selfDestinationPath = "$appsDir\Winston.ps1"
-
-    if (-not ($PSCommandPath -eq $selfDestinationPath)) {
-        $upstreamWinstonScriptURL = "https://raw.githubusercontent.com/TheStalwart/winston11/refs/heads/main/Winston.ps1"
+    $expirationDate = (Get-Date).AddHours(-10)
+    $upstreamWinstonScriptURL = "https://raw.githubusercontent.com/TheStalwart/winston11/refs/heads/main/Winston.ps1"
+    
+    # Running the script via `irm <URL> | iex` is considered force-update
+    if (-not $PSCommandPath) {
+        Write-Output "Force-updating."
         Invoke-WebRequest -Uri $upstreamWinstonScriptURL -OutFile $selfDestinationPath
+        return [bool]$true
     }
+    
+    # If the destination copy doesn't exist, download it. Otherwise refresh if it's older than 10 hours.
+    if (-not (Test-Path $selfDestinationPath)) {
+        Write-Output "No existing copy of Winston.ps1 found, downloading."
+        Invoke-WebRequest -Uri $upstreamWinstonScriptURL -OutFile $selfDestinationPath
+        return [bool]$true
+    }
+    else {
+        $lastWrite = (Get-Item $selfDestinationPath).LastWriteTime
+        if ($expirationDate -gt $lastWrite) {
+            Write-Output "Existing copy of Winston.ps1 is stale, refreshing."
+            Invoke-WebRequest -Uri $upstreamWinstonScriptURL -OutFile $selfDestinationPath
+            return [bool]$true
+        }
+    }
+
+    return [bool]$false
 }
 
 <#
@@ -96,7 +116,12 @@ function Main {
     }
 
     if (-not $SkipInstallSelf) {
-        Install-Self
+        $selfDestinationPath = "$appsDir\Winston.ps1"
+        if (Install-Self) {
+            # execute the updated script and exit current instance
+            & "$selfDestinationPath"
+            exit 0
+        }
     }
 
     Install-EssentialUtilities
