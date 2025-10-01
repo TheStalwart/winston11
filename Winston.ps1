@@ -34,6 +34,18 @@ function Install-WinCaffeine {
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" -Name "WinCaffeine" -Value "$winCaffeinePath"
 }
 
+function Install-Rainmeter {
+    winget install --id Rainmeter.Rainmeter -e
+
+    # Configure Rainmeter to start with Windows
+    $rainmeterExecutablePath = "$env:ProgramFiles\Rainmeter\Rainmeter.exe"
+    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" -Name "Rainmeter" -Value "`"$rainmeterExecutablePath`" -tray"
+
+    # Disable the default "Welcome" skin.
+    # https://docs.rainmeter.net/manual/bangs/#DeactivateConfig
+    & "$rainmeterExecutablePath" !DeactivateConfig "illustro\Welcome"
+}
+
 <#
 .SYNOPSIS
   Installs Steam if not already present.
@@ -65,6 +77,7 @@ function Install-EpicGamesLauncher {
 function Main {
     Install-EssentialUtilities
     Install-WinCaffeine
+    Install-Rainmeter
     Install-Steam
     Install-EpicGamesLauncher
 }
