@@ -44,6 +44,13 @@ function Install-Rainmeter {
     # Disable the default "Welcome" skin.
     # https://docs.rainmeter.net/manual/bangs/#DeactivateConfig
     & "$rainmeterExecutablePath" !DeactivateConfig "illustro\Welcome"
+
+    # Game Mode does not have a way to enable it via command line or config file,
+    # by design.
+    # https://forum.rainmeter.net/viewtopic.php?t=33882
+    # https://forum.rainmeter.net/viewtopic.php?t=37344
+    # But it does store the setting somewhere,
+    # can we reverse engineer it?
 }
 
 <#
