@@ -68,7 +68,7 @@ function Install-Rainmeter {
 
     # Configure Rainmeter to start with Windows
     $rainmeterExecutablePath = "$env:ProgramFiles\Rainmeter\Rainmeter.exe"
-    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" -Name "Rainmeter" -Value "`"$rainmeterExecutablePath`" -tray"
+    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" -Name "Rainmeter" -Value "$rainmeterExecutablePath"
 
     # Disable the default "Welcome" skin.
     # https://docs.rainmeter.net/manual/bangs/#DeactivateConfig
