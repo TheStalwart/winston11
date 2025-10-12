@@ -46,6 +46,7 @@ function Install-EssentialUtilities {
     winget install --id PrimateLabs.Geekbench.6 -e # OpenCL and Vulkan benchmark
     winget install --id Unigine.HeavenBenchmark -e # DirectX 9 and 11 benchmark
     winget install --id Ookla.Speedtest.Desktop -e
+    winget install --id WinDirStat.WinDirStat -e
 }
 
 function Install-WinCaffeine {
