@@ -47,6 +47,8 @@ function Install-EssentialUtilities {
     winget install --id Unigine.HeavenBenchmark -e # DirectX 9 and 11 benchmark
     winget install --id Ookla.Speedtest.Desktop -e
     winget install --id WinDirStat.WinDirStat -e
+    winget install --id Rufus.Rufus -e
+    winget install --id thebookisclosed.Vive -e # ViVeTool, Win11 feature flag toggler
 }
 
 function Install-WinCaffeine {
