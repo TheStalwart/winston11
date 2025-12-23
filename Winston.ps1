@@ -49,6 +49,7 @@ function Install-EssentialUtilities {
     winget install --id WinDirStat.WinDirStat -e
     winget install --id Rufus.Rufus -e
     winget install --id thebookisclosed.Vive -e # ViVeTool, Win11 feature flag toggler
+    winget install --id Microsoft.DirectX -e # DirectX 9 Runtime
 }
 
 function Install-WinCaffeine {
